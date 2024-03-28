@@ -16,6 +16,8 @@
 		9C3C13A02BA19DB40026B215 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3C139F2BA19DB40026B215 /* SplashScreenView.swift */; };
 		9C3C13A22BA23A560026B215 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3C13A12BA23A560026B215 /* GamePage.swift */; };
 		9C8270272BB2958A00D3937E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C8270262BB2958A00D3937E /* Assets.xcassets */; };
+		9C8270292BB331AD00D3937E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8270282BB331AD00D3937E /* CardView.swift */; };
+		9C82702B2BB4B05D00D3937E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C82702A2BB4B05D00D3937E /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		9C3C139F2BA19DB40026B215 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		9C3C13A12BA23A560026B215 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; usesTabs = 0; };
 		9C8270262BB2958A00D3937E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Ride The Bus 2/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		9C8270282BB331AD00D3937E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		9C82702A2BB4B05D00D3937E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,11 +75,13 @@
 			children = (
 				9C1943E92BB2340D002E2F81 /* HowToPlay.swift */,
 				9C3C13A12BA23A560026B215 /* GamePage.swift */,
+				9C8270282BB331AD00D3937E /* CardView.swift */,
 				9C3C139F2BA19DB40026B215 /* SplashScreenView.swift */,
 				9C3C13642BA19D160026B215 /* Ride_The_Bus_2App.swift */,
 				9C3C13662BA19D160026B215 /* ContentView.swift */,
 				9C1943E12BAC9B57002E2F81 /* Stack.swift */,
 				9C1943E52BAE1410002E2F81 /* Testing.swift */,
+				9C82702A2BB4B05D00D3937E /* Card.swift */,
 				9C8270262BB2958A00D3937E /* Assets.xcassets */,
 				9C1943DD2BABD8CF002E2F81 /* Preview Content */,
 			);
@@ -153,11 +159,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C1943E62BAE1410002E2F81 /* Testing.swift in Sources */,
+				9C82702B2BB4B05D00D3937E /* Card.swift in Sources */,
 				9C1943EA2BB2340D002E2F81 /* HowToPlay.swift in Sources */,
 				9C3C13A22BA23A560026B215 /* GamePage.swift in Sources */,
 				9C1943E22BAC9B57002E2F81 /* Stack.swift in Sources */,
 				9C3C13672BA19D160026B215 /* ContentView.swift in Sources */,
 				9C3C13652BA19D160026B215 /* Ride_The_Bus_2App.swift in Sources */,
+				9C8270292BB331AD00D3937E /* CardView.swift in Sources */,
 				9C3C13A02BA19DB40026B215 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

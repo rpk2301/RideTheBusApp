@@ -24,5 +24,9 @@ struct Stack<T> {
     mutating func removeAll() {
         elements.removeAll()
     }
+    
+    func toArray() -> [T] {
+            return elements
+        }
 }
 
