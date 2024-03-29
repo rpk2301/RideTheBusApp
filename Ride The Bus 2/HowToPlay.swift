@@ -25,6 +25,8 @@ struct HowToPlay: View {
                         SlideView(title: "Stacks 1 and 2", description: "On The First Two Stacks, Guess Whether The Next Card Drawn Will Be Higher Or Lower Than The Highlighted Card", imageName: "firstTwo")
                         SlideView(title: "Stacks 3 and 4", description: "On The Final Two Stacks, Guess The Next Cards Color And Suit", imageName: "finalTwo").frame(width: UIScreen.main.bounds.width, height: 500.0)
                         SlideView(title: "Progression", description: "A Correct Guess Will Advance You One Stack, While An Incorrect Guess Will Move You One Stack Back", imageName: "moveUp")
+                        SlideView(title: "View A Stack", description: "Select A Stack To View Its Contents - This Can Help You Make A Guess On Later Stacks In The Bus", imageName: "Select1")
+                        SlideView(title: "Win!", description: "Progressing Through The Entire Bus Will Take You To The Win Screen - Congratulations, You Just Rode The Bus!", imageName: "Win1")
                     }
                     .frame(maxWidth: .infinity)
                 }

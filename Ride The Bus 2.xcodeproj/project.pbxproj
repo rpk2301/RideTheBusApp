@@ -18,6 +18,12 @@
 		9C8270272BB2958A00D3937E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C8270262BB2958A00D3937E /* Assets.xcassets */; };
 		9C8270292BB331AD00D3937E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8270282BB331AD00D3937E /* CardView.swift */; };
 		9C82702B2BB4B05D00D3937E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C82702A2BB4B05D00D3937E /* Card.swift */; };
+		9C82702D2BB5F28100D3937E /* FinishScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C82702C2BB5F28100D3937E /* FinishScreen.swift */; };
+		9C82702F2BB60C4600D3937E /* winSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C82702E2BB60C4600D3937E /* winSplash.swift */; };
+		9C8CB2532BB6227600FD5B66 /* UserDataFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CB2522BB6227600FD5B66 /* UserDataFileManager.swift */; };
+		9C8CB2552BB62AA700FD5B66 /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CB2542BB62AA700FD5B66 /* Leaderboard.swift */; };
+		9C8CB2592BB6713F00FD5B66 /* BusIntro2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CB2582BB6713F00FD5B66 /* BusIntro2.mp3 */; };
+		9C8CB25B2BB6714600FD5B66 /* BusEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CB25A2BB6714600FD5B66 /* BusEnd.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,12 @@
 		9C8270262BB2958A00D3937E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Ride The Bus 2/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		9C8270282BB331AD00D3937E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9C82702A2BB4B05D00D3937E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		9C82702C2BB5F28100D3937E /* FinishScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishScreen.swift; sourceTree = "<group>"; };
+		9C82702E2BB60C4600D3937E /* winSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = winSplash.swift; sourceTree = "<group>"; };
+		9C8CB2522BB6227600FD5B66 /* UserDataFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataFileManager.swift; sourceTree = "<group>"; };
+		9C8CB2542BB62AA700FD5B66 /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		9C8CB2582BB6713F00FD5B66 /* BusIntro2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BusIntro2.mp3; sourceTree = "<group>"; };
+		9C8CB25A2BB6714600FD5B66 /* BusEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BusEnd.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +89,18 @@
 				9C3C13A12BA23A560026B215 /* GamePage.swift */,
 				9C8270282BB331AD00D3937E /* CardView.swift */,
 				9C3C139F2BA19DB40026B215 /* SplashScreenView.swift */,
+				9C8CB2542BB62AA700FD5B66 /* Leaderboard.swift */,
 				9C3C13642BA19D160026B215 /* Ride_The_Bus_2App.swift */,
 				9C3C13662BA19D160026B215 /* ContentView.swift */,
 				9C1943E12BAC9B57002E2F81 /* Stack.swift */,
 				9C1943E52BAE1410002E2F81 /* Testing.swift */,
 				9C82702A2BB4B05D00D3937E /* Card.swift */,
+				9C82702C2BB5F28100D3937E /* FinishScreen.swift */,
+				9C82702E2BB60C4600D3937E /* winSplash.swift */,
+				9C8CB2522BB6227600FD5B66 /* UserDataFileManager.swift */,
 				9C8270262BB2958A00D3937E /* Assets.xcassets */,
+				9C8CB2582BB6713F00FD5B66 /* BusIntro2.mp3 */,
+				9C8CB25A2BB6714600FD5B66 /* BusEnd.mp3 */,
 				9C1943DD2BABD8CF002E2F81 /* Preview Content */,
 			);
 			path = "Ride The Bus 2";
@@ -147,6 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8270272BB2958A00D3937E /* Assets.xcassets in Resources */,
+				9C8CB25B2BB6714600FD5B66 /* BusEnd.mp3 in Resources */,
+				9C8CB2592BB6713F00FD5B66 /* BusIntro2.mp3 in Resources */,
 				9C1943DE2BABD8CF002E2F81 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8CB2532BB6227600FD5B66 /* UserDataFileManager.swift in Sources */,
 				9C1943E62BAE1410002E2F81 /* Testing.swift in Sources */,
 				9C82702B2BB4B05D00D3937E /* Card.swift in Sources */,
 				9C1943EA2BB2340D002E2F81 /* HowToPlay.swift in Sources */,
@@ -166,6 +187,9 @@
 				9C3C13672BA19D160026B215 /* ContentView.swift in Sources */,
 				9C3C13652BA19D160026B215 /* Ride_The_Bus_2App.swift in Sources */,
 				9C8270292BB331AD00D3937E /* CardView.swift in Sources */,
+				9C82702D2BB5F28100D3937E /* FinishScreen.swift in Sources */,
+				9C82702F2BB60C4600D3937E /* winSplash.swift in Sources */,
+				9C8CB2552BB62AA700FD5B66 /* Leaderboard.swift in Sources */,
 				9C3C13A02BA19DB40026B215 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

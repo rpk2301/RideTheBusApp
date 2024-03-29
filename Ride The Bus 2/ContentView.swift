@@ -4,12 +4,17 @@ import WebKit
 struct ContentView: View {
     
     @State private var GoToGame = false
+    @State private var goToLeaderboard = false
     
     var body: some View {
         if(GoToGame == true){
             GamePage()
             }
+        else if(goToLeaderboard==true){
+            Leaderboard()
+        }
         else{
+            
             NavigationView{
                 ZStack{
                     Image("background-cloth")
@@ -61,33 +66,7 @@ struct ContentView: View {
                             
                         })
                         NavigationLink(destination: HowToPlay()) {
-                                Text("How to Play")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .bold()
-                                    .frame(width: 200, height: 50)
-                                    .foregroundColor(.yellow)
-                                    .background(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                Color(red: 0.8, green: 0.6, blue: 0.2), // Example RGB values
-                                                Color(red: 0.1, green: 0.4, blue: 0.2)
-                                            ]),
-                                            startPoint: .bottomLeading,
-                                            endPoint: .topLeading
-                                        )
-                                    )
-                                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                                    .shadow(radius: 3)
-                            }
-                            .padding(.vertical)
-                        
-                    
-                    
-                        Button(action: {
-                            deal()
-                        }, label: {
-                            Text("Options")
+                            Text("How to Play")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .bold()
@@ -105,7 +84,31 @@ struct ContentView: View {
                                 )
                                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                                 .shadow(radius: 3)
-                        })
+                        }
+                        .padding(.vertical)
+                        
+                        
+                        
+                        NavigationLink(destination: Leaderboard()){
+                            Text("Leaderboard")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .bold()
+                                .frame(width: 200, height: 50)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color(red: 0.8, green: 0.6, blue: 0.2), // Example RGB values
+                                            Color(red: 0.1, green: 0.4, blue: 0.2)
+                                        ]),
+                                        startPoint: .bottomLeading,
+                                        endPoint: .topLeading
+                                    )
+                                )
+                                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                .shadow(radius: 3)
+                        }
                         
                         
                         
@@ -113,7 +116,7 @@ struct ContentView: View {
                         HStack{
                             Spacer()
                             VStack{
-                                Text("0")
+                                Text("\(UserDataFileManager.displayTotalScore())")
                                     .padding(0.0)
                                     .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2) // Example shadow
                                     .font(.system(size: 40.0))
@@ -137,9 +140,7 @@ struct ContentView: View {
         }
         
     }
-    func deal () {
-        print("Riding the bus")
-    }
+    
 }
 #Preview {
     ContentView()

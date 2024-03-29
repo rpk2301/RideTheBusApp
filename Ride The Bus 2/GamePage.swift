@@ -8,6 +8,7 @@ struct GamePage: View {
     @State private var currentIndex = 0
     @State private var nextIndex = 1
     @State private var deckIndex = 0
+    @State private var score = 23
     @State private var higherGuess = false
     @State private var lowerGuess = false
     @State private var redGuess = false
@@ -27,22 +28,32 @@ struct GamePage: View {
     @State private var thirdStackFirstFlip: Bool = false
     @State private var fourthStackFirstFlip: Bool = false
     @State private var isCardViewPresented = false
-    @State private var isShowingPopup = false
-    var DeckSize = 52
+    @State private var didWin = true
+    @State private var DeckSize = 48
+    @State private var showDeck = false
+    @State private var goHome = false
     
     
     private var deck: [Card]
-   
+    
     
     init() {
-        var shuffledDeck = [Card]()
-        for suit in suits {
-            for rank in ranks {
-                let card = Card(suit: suit, rank: rank)
-                shuffledDeck.append(card)
-            }
-        }
-        self.deck = shuffledDeck.shuffled()
+        var shuffledDecks = [[Card]]()
+
+          // Create and shuffle each deck individually
+          for _ in 0..<20 {
+              var deck = [Card]()
+              for suit in suits {
+                  for rank in ranks {
+                      let card = Card(suit: suit, rank: rank)
+                      deck.append(card)
+                  }
+              }
+              shuffledDecks.append(deck.shuffled())
+          }
+
+
+          self.deck = shuffledDecks.reduce([], +)
         var bus = [Stack<Card>]()
         
         
@@ -52,9 +63,7 @@ struct GamePage: View {
             bus.append(stack)
             deck.remove(at: 0)
         }
-        for  card in deck {
-            print(card.rank+card.suit)
-        }
+        print(deck.count)
         self.bus = bus
         FirstStackTop = bus[0].peek()!
         SecondStackTop = bus[1].peek()!
@@ -62,18 +71,27 @@ struct GamePage: View {
         FourthStackTop = bus[3].peek()!
         
     }
-   
+    
+    
+    
     
     var body: some View {
         if(isCardViewPresented){
-                CardView(stack: bus[0])
-            }
-        
+            CardView(stack: bus[0])
+        }
+        else if(didWin){
+            WinSplashView(score: score)
+        }
+        else if(deckIndex>1000){
+            WinSplashView(score: 1001)
+        }
+        else if(goHome){
+            ContentView()
+        }
         else{
             NavigationView{
                 ZStack {
                     Image("background-cloth")
-                        .ignoresSafeArea(.all)
                     HStack{
                         if(currentIndex == 0 || currentIndex == 1)
                         {
@@ -152,11 +170,11 @@ struct GamePage: View {
                                         .background(
                                             LinearGradient(
                                                 gradient: Gradient(colors: [
-                                                         Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
-                                                         Color(red: 0.2, green: 0.0, blue: 0.0) // Black
-                                                     ]),
-                                                     startPoint: .bottomLeading,
-                                                     endPoint: .topLeading
+                                                    Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
+                                                    Color(red: 0.2, green: 0.0, blue: 0.0) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
                                         )
                                         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
@@ -178,12 +196,12 @@ struct GamePage: View {
                                         .foregroundColor(.white)
                                         .background(
                                             LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
-                                                        Color(red: 0.9, green: 0.9, blue: 0.9) // Black
-                                                    ]),
-                                                    startPoint: .bottomLeading,
-                                                    endPoint: .topLeading
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
+                                                    Color(red: 0.9, green: 0.9, blue: 0.9) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
                                         )
                                         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
@@ -196,119 +214,119 @@ struct GamePage: View {
                             
                         }
                         else if(currentIndex == 3){
-                                VStack{
-                                    Button(action: {
-                                        heartGuess = true
-                                        isGuessing=false
-                                        checkSuit()
-                                    }, label: {
-                                        Text("Hearts")
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                            .bold()
-                                            .frame(width: 100, height: 50)
-                                        
-                                            .foregroundColor(.yellow)
-                                            .background(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                             Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
-                                                             Color(red: 0.2, green: 0.0, blue: 0.0) // Black
-                                                         ]),
-                                                         startPoint: .bottomLeading,
-                                                         endPoint: .topLeading
-                                                )
+                            VStack{
+                                Button(action: {
+                                    heartGuess = true
+                                    isGuessing=false
+                                    checkSuit()
+                                }, label: {
+                                    Text("Hearts")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .bold()
+                                        .frame(width: 100, height: 50)
+                                    
+                                        .foregroundColor(.yellow)
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
+                                                    Color(red: 0.2, green: 0.0, blue: 0.0) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
-                                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                                            .shadow(radius: 3)
-                                            .rotationEffect(.degrees(90))
-                                    })
-                                    .padding(.trailing, 50.0)
-                                    .frame(width: 65.0, height: 100.0)
-                                    Button(action: {
-                                        diamondGuess = true
-                                        isGuessing = false
-                                        checkSuit()
-                                    }, label: {
-                                        Text("Diamonds")
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                            .bold()
-                                            .frame(width: 120, height: 50)
-                                            .foregroundColor(.yellow)
-                                            .background(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                             Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
-                                                             Color(red: 0.2, green: 0.0, blue: 0.0) // Black
-                                                         ]),
-                                                         startPoint: .bottomLeading,
-                                                         endPoint: .topLeading
-                                                )
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                        .shadow(radius: 3)
+                                        .rotationEffect(.degrees(90))
+                                })
+                                .padding(.trailing, 50.0)
+                                .frame(width: 65.0, height: 100.0)
+                                Button(action: {
+                                    diamondGuess = true
+                                    isGuessing = false
+                                    checkSuit()
+                                }, label: {
+                                    Text("Diamonds")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .bold()
+                                        .frame(width: 120, height: 50)
+                                        .foregroundColor(.yellow)
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
+                                                    Color(red: 0.2, green: 0.0, blue: 0.0) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
-                                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                                            .shadow(radius: 3)
-                                            .rotationEffect(.degrees(90))
-                                    })
-                                    .padding(.trailing, 50.0)
-                                    .frame(width: 65.0, height: 115.0)
-                                    Button(action: {
-                                        spadeGuess = true
-                                        isGuessing=false
-                                        checkSuit()
-                                    }, label: {
-                                        Text("Spades")
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                            .bold()
-                                            .frame(width: 100, height: 50)
-                                        
-                                            .foregroundColor(.white)
-                                            .background(
-                                                LinearGradient(
-                                                        gradient: Gradient(colors: [
-                                                            Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
-                                                            Color(red: 0.9, green: 0.9, blue: 0.9) // Black
-                                                        ]),
-                                                        startPoint: .bottomLeading,
-                                                        endPoint: .topLeading
-                                                )
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                        .shadow(radius: 3)
+                                        .rotationEffect(.degrees(90))
+                                })
+                                .padding(.trailing, 50.0)
+                                .frame(width: 65.0, height: 115.0)
+                                Button(action: {
+                                    spadeGuess = true
+                                    isGuessing=false
+                                    checkSuit()
+                                }, label: {
+                                    Text("Spades")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .bold()
+                                        .frame(width: 100, height: 50)
+                                    
+                                        .foregroundColor(.white)
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
+                                                    Color(red: 0.9, green: 0.9, blue: 0.9) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
-                                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                                            .shadow(radius: 3)
-                                            .rotationEffect(.degrees(90))
-                                    })
-                                    .padding(.trailing, 50.0)
-                                    .frame(width: 65.0, height: 100.0)
-                                    Button(action: {
-                                        clubGuess = true
-                                        isGuessing=false
-                                        checkSuit()
-                                    }, label: {
-                                        Text("Clubs")
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                            .bold()
-                                            .frame(width: 100, height: 50)
-                                        
-                                            .foregroundColor(.white)
-                                            .background(
-                                                LinearGradient(
-                                                        gradient: Gradient(colors: [
-                                                            Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
-                                                            Color(red: 0.9, green: 0.9, blue: 0.9) // Black
-                                                        ]),
-                                                        startPoint: .bottomLeading,
-                                                        endPoint: .topLeading
-                                                )
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                        .shadow(radius: 3)
+                                        .rotationEffect(.degrees(90))
+                                })
+                                .padding(.trailing, 50.0)
+                                .frame(width: 65.0, height: 100.0)
+                                Button(action: {
+                                    clubGuess = true
+                                    isGuessing=false
+                                    checkSuit()
+                                }, label: {
+                                    Text("Clubs")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .bold()
+                                        .frame(width: 100, height: 50)
+                                    
+                                        .foregroundColor(.white)
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color(red: 0.0, green: 0.0, blue: 0.0), // Whitish color
+                                                    Color(red: 0.9, green: 0.9, blue: 0.9) // Black
+                                                ]),
+                                                startPoint: .bottomLeading,
+                                                endPoint: .topLeading
                                             )
-                                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                                            .shadow(radius: 3)
-                                            .rotationEffect(.degrees(90))
-                                    })
-                                    .padding(.trailing, 50.0)
-                                    .frame(width: 65.0, height: 100.0)
-                                }
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                        .shadow(radius: 3)
+                                        .rotationEffect(.degrees(90))
+                                })
+                                .padding(.trailing, 50.0)
+                                .frame(width: 65.0, height: 100.0)
+                            }
                         }
                         VStack() {
                             NavigationLink(destination: CardView(stack: bus[0])){
@@ -478,15 +496,25 @@ struct GamePage: View {
                         }
                         HStack {
                             VStack {
-                                if(countDeck()<48){
-                                    Text("Deck Size: \(countDeck())")
+                                if(countDeck()>=1 || showDeck){
+                                    Text("Score: \(countDeck())")
                                         .frame(maxWidth: .infinity, maxHeight: nil)
                                         .frame(width: 175.0)
                                         .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
-                                        .font(.system(size: 22))
+                                        .font(.system(size: 30))
                                         .fontWeight(.medium)
                                         .foregroundColor(Color.yellow)
                                         .multilineTextAlignment(.center)
+                                    Button(action: {
+                                        goHome=true
+                                    }) {
+                                        Image(systemName: "arrow.left.circle.fill")
+                                            .foregroundColor(.yellow)
+                                            .font(.title)
+                                    }
+                                    .padding(.trailing, 700.0)
+                                    .padding(.bottom,50)
+
                                 }
                                 else{
                                     Text("Ride The Bus")
@@ -497,6 +525,18 @@ struct GamePage: View {
                                         .fontWeight(.medium)
                                         .foregroundColor(Color.yellow)
                                         .multilineTextAlignment(.center)
+                             
+                                    Button(action: {
+                                        goHome=true
+                                    }) {
+                                        Image(systemName: "arrow.left.circle.fill")
+                                            .foregroundColor(.yellow)
+                                            .font(.title)
+                                    }
+                                    .padding(.trailing, 700.0)
+                                    .padding(.bottom,50)
+                                    
+                                    
                                 }
                             }
                             .frame(width: 30.0, height: 300.0)
@@ -513,58 +553,60 @@ struct GamePage: View {
     
     func flashScreenRed(duration: TimeInterval) {
         guard let windowScene = UIApplication.shared.connectedScenes
-                  .compactMap({ $0 as? UIWindowScene })
-                  .first(where: { $0.activationState == .foregroundActive }),
-                let window = windowScene.windows.first
-          else {
-              return
-          }
-
-          let redView = UIView(frame: window.bounds)
-          redView.backgroundColor = UIColor.red
-          redView.alpha = 0.5
-          
-          window.addSubview(redView)
-          
-          UIView.animate(withDuration: duration, animations: {
-              redView.alpha = 0.0
-          }) { _ in
-              redView.removeFromSuperview()
-          }
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }),
+              let window = windowScene.windows.first
+        else {
+            return
+        }
+        
+        let redView = UIView(frame: window.bounds)
+        redView.backgroundColor = UIColor.red
+        redView.alpha = 0.5
+        
+        window.addSubview(redView)
+        
+        UIView.animate(withDuration: duration, animations: {
+            redView.alpha = 0.0
+        }) { _ in
+            redView.removeFromSuperview()
+        }
     }
     
     func flashScreenGreen(duration: TimeInterval) {
         guard let windowScene = UIApplication.shared.connectedScenes
-                  .compactMap({ $0 as? UIWindowScene })
-                  .first(where: { $0.activationState == .foregroundActive }),
-                let window = windowScene.windows.first
-          else {
-              return
-          }
-
-          let redView = UIView(frame: window.bounds)
-          redView.backgroundColor = UIColor.systemGreen
-          redView.alpha = 0.5
-          
-          window.addSubview(redView)
-          
-          UIView.animate(withDuration: duration, animations: {
-              redView.alpha = 0.0
-          }) { _ in
-              redView.removeFromSuperview()
-          }
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }),
+              let window = windowScene.windows.first
+        else {
+            return
+        }
+        
+        let redView = UIView(frame: window.bounds)
+        redView.backgroundColor = UIColor.systemGreen
+        redView.alpha = 0.5
+        
+        window.addSubview(redView)
+        
+        UIView.animate(withDuration: duration, animations: {
+            redView.alpha = 0.0
+        }) { _ in
+            redView.removeFromSuperview()
+        }
     }
     
     func navigateToCardView() {
         isCardViewPresented = true
     }
-
+    
     
     func countDeck() -> Int{
-        return DeckSize-4-deckIndex
+        
+        return score
     }
     
     func checkColor(){
+        score+=1
         DrawCard()
         if((deck[deckIndex].suit == "hearts" || deck[deckIndex].suit == "diamonds") && redGuess || (deck[deckIndex].suit == "clubs" || deck[deckIndex].suit == "spades") && blackGuess)
         {
@@ -581,7 +623,7 @@ struct GamePage: View {
             nextIndex = nextIndex - 1
             print("Incorrect!")
             print("The next card was " + deck[deckIndex].rank+deck[deckIndex].suit)
-                deckIndex+=1
+            deckIndex+=1
         }
         if currentIndex == 2 {
             thirdStackFirstFlip = true
@@ -589,22 +631,23 @@ struct GamePage: View {
         else if currentIndex == 3 {
             fourthStackFirstFlip = true
         }
-
-
+        
+        
         redGuess = false
         blackGuess = false
     }
     
     
     
-    func checkSuit(){
+     func checkSuit(){
+        score+=1
         DrawCard()
         if((deck[deckIndex].suit == "hearts" && heartGuess) || (deck[deckIndex].suit == "diamonds" && diamondGuess) || (deck[deckIndex].suit == "clubs" && clubGuess) || (deck[deckIndex].suit == "spades" && spadeGuess))
             
         {
             flashScreenGreen(duration: 0.5)
-            currentIndex = nextIndex
-            nextIndex = nextIndex+1
+            didWin = true
+            UserDataFileManager.writeTotalScore(score)
             print("Bus Ridden!")
             print("The next card was " + deck[deckIndex].rank+deck[deckIndex].suit)
             deckIndex+=1
@@ -615,14 +658,14 @@ struct GamePage: View {
             nextIndex = nextIndex - 1
             print("Incorrect!")
             print("The next card was " + deck[deckIndex].rank+deck[deckIndex].suit)
-                deckIndex+=1
+            deckIndex+=1
         }
         
         if currentIndex == 3 {
             fourthStackFirstFlip = true
         }
-
-
+        
+        
         clubGuess = false
         spadeGuess = false
         heartGuess = false
@@ -640,6 +683,7 @@ struct GamePage: View {
     func checkGuess() {
         let TopPileCard = bus[currentIndex].peek()
         DrawCard()
+        score+=1
         
         
         if (deck[deckIndex].numericValue > TopPileCard?.numericValue ?? 0 && higherGuess) ||
@@ -699,7 +743,11 @@ struct GamePage: View {
             FourthStackTop = deck[deckIndex]
             
         }
+        
+        
     }
+    
+    
 }
     
     

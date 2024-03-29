@@ -6,34 +6,24 @@ struct CustomPopup: View {
     var body: some View {
         ZStack {
             // Background overlay
-            LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [Color.green, Color.black]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.4) // Adjust opacity as needed
+                .opacity(0.4)
             
-            // Popup content
-            VStack {
-                Text("Congratulations, You Rode The Bus!")
-                    .padding()
-                    .foregroundColor(.white) // Set text color to white to contrast with the gradient background
-                    .background(Color.black.opacity(0.8)) // Add a semi-transparent background for better readability
-                    .cornerRadius(20)
-                    .shadow(radius: 5)
-                    .rotationEffect(.degrees(90))
-                
-                Button("Close") {
-                    self.isShowing = false
-                }
-                .padding(.top, 20)
+            if isShowing {
+                // Text displayed horizontally across the screen
+                Text("Congratulations, you rode the bus")
+                    .font(.largeTitle)
+                    .foregroundColor(.yellow)
+                    .rotationEffect(.degrees(-90))
+                    .offset(x: -UIScreen.main.bounds.width / 2 + 80, y: UIScreen.main.bounds.height / 2)
             }
-            .padding()
         }
-        .opacity(isShowing ? 1 : 0)
-        .animation(.easeInOut)
     }
 }
 
 struct Testing2: View {
-    @State private var isPopupVisible = false
+    @State private var isPopupVisible = true
 
     var body: some View {
         ZStack {
