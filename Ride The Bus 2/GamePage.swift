@@ -40,7 +40,7 @@ struct GamePage: View {
     init() {
         var shuffledDecks = [[Card]]()
 
-          // Create and shuffle each deck individually
+          
           for _ in 0..<20 {
               var deck = [Card]()
               for suit in suits {

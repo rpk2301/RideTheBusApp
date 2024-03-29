@@ -18,7 +18,7 @@ struct CardView: View {
                     .fontWeight(.medium)
                     .foregroundColor(Color.yellow)
                     .rotationEffect(.degrees(90))
-                    .frame(width: 160.0, height: 200.0) // Rotate the frame along with the text
+                    .frame(width: 160.0, height: 200.0)
             
                 Spacer()
                 
@@ -32,8 +32,8 @@ struct CardView: View {
                 .padding(.trailing, 40.0)
                 
             }
-            .padding(.horizontal) // Adjust horizontal padding as needed
-            .padding(.bottom, 660.0) // Adjust top padding as needed
+            .padding(.horizontal)
+            .padding(.bottom, 660.0)
             VStack{
                 Text("Cards In Stack: \(stack.count)")
                     .padding(.top, 280.0)
@@ -73,11 +73,11 @@ struct CardView: View {
         .navigationBarHidden(true)
     }
     func countBlack() -> Int {
-          // Count the number of black cards in the stack
+          
           return stack.toArray().filter { $0.suit == "spades" || $0.suit == "clubs" }.count
       }
     func countRed() -> Int {
-          // Count the number of black cards in the stack
+          
           return stack.toArray().filter { $0.suit == "hearts" || $0.suit == "diamonds" }.count
       }
 }

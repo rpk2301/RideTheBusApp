@@ -6,8 +6,8 @@ struct FinishScreen: View {
     @State private var playerName = ""
     @State private var goGame = false
     @State private var goHome = false
-    @State private var goToLeaderboard = false // Add state for controlling navigation to leaderboard
-    @State private var showNameInput = false // Add state for controlling name input sheet
+    @State private var goToLeaderboard = false
+    @State private var showNameInput = false
     
     init(score: Int) {
         self.score = score
@@ -32,7 +32,7 @@ struct FinishScreen: View {
                     HStack {
                         VStack(spacing: 120) {
                             Button(action: {
-                                showNameInput = true // Show name input sheet when button is tapped
+                                showNameInput = true
                             }) {
                                 Text("Add To Leaderboard")
                                     .font(.title2)
@@ -47,7 +47,7 @@ struct FinishScreen: View {
                                     if !name.isEmpty {
                                         let initialScore = self.score
                                         UserDataFileManager.saveScore(forPlayer: name, score: initialScore)
-                                        self.goHome = true // Navigate to leaderboard
+                                        self.goHome = true
                                     }
                                 })
                             }
@@ -92,7 +92,7 @@ struct FinishScreen: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 15)
                                         .stroke(Color.yellow.opacity(0.6), lineWidth: 3)
-                                        .shadow(color: Color.black.opacity(0.8), radius: 20, x: 0, y: 0) // Add a shadow for the glow effect
+                                        .shadow(color: Color.black.opacity(0.8), radius: 20, x: 0, y: 0)
                                 )
                                 .frame(width: 220.0, height: 300.0)
                             
@@ -104,10 +104,10 @@ struct FinishScreen: View {
                                 .fontWeight(.medium)
                                 .foregroundColor(Color.yellow)
                                 .multilineTextAlignment(.center)
-                                .scaleEffect(isGlowing ? 1.2 : 1.0) // Scale effect based on isGlowing state
+                                .scaleEffect(isGlowing ? 1.2 : 1.0)
                                 .onAppear {
                                     withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                                        self.isGlowing.toggle() // Toggle the state to trigger animation
+                                        self.isGlowing.toggle() 
                                     }
                                 }
                         }

@@ -1,15 +1,13 @@
 import Foundation
 
 class UserDataFileManager {
-    // Define file paths
     private static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
-    // Method to get file URL for a player's score
+    
     private static func filePath(forPlayer playerId: String) -> URL {
         return documentsDirectory.appendingPathComponent("\(playerId).txt")
     }
     
-    // Save player's score
     static func saveScore(forPlayer playerId: String, score: Int) {
         let scoreString = String(score)
         let filePath = self.filePath(forPlayer: playerId)
@@ -20,7 +18,7 @@ class UserDataFileManager {
         }
     }
     
-    // Load player's score
+ 
     static func loadScore(forPlayer playerId: String) -> Int? {
         let filePath = self.filePath(forPlayer: playerId)
         do {
@@ -37,7 +35,7 @@ class UserDataFileManager {
         }
     }
     
-    // Method to list all player files in the documents directory
+   
     static func listPlayerFiles() -> [URL]? {
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsDirectory, includingPropertiesForKeys: nil, options: [])
@@ -48,7 +46,7 @@ class UserDataFileManager {
         }
     }
     
-    // Method to list all players and their scores
+   
     static func listPlayersAndScores() {
         guard let playerFiles = listPlayerFiles() else {
             print("No player files found")
@@ -56,7 +54,7 @@ class UserDataFileManager {
         }
         
         for playerFile in playerFiles {
-            // Skip the TotalScore file
+          
             if playerFile.lastPathComponent == "TotalScore.txt" {
                 continue
             }
@@ -68,8 +66,6 @@ class UserDataFileManager {
         }
     }
 
-    
-    // Method to list all text files in the documents directory
     static func listTextFiles() -> [String]? {
         do {
             print("listing text files")
@@ -81,8 +77,6 @@ class UserDataFileManager {
         }
     }
     static func deletePlayer(_ playerId: String) {
-          // Implement the logic to delete the player record with the given playerId
-          // For example, if you're storing player data in files, you can delete the file corresponding to the playerId
           guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
               return
           }
@@ -106,12 +100,11 @@ class UserDataFileManager {
            do {
                var totalScore = 0
                
-               // Check if the "TotalScore" file exists
                if FileManager.default.fileExists(atPath: fileURL.path) {
-                   // Read the content of the file as a string
+                 
                    let scoreString = try String(contentsOf: fileURL)
                    
-                   // Convert the string to an integer
+                   
                    if let existingScore = Int(scoreString.trimmingCharacters(in: .whitespacesAndNewlines)) {
                        totalScore = existingScore
                    } else {
@@ -119,10 +112,9 @@ class UserDataFileManager {
                    }
                }
                
-               // Increment the total score with the new score
+             
                totalScore += score
                
-               // Write the updated total score to the "TotalScore" file
                try "\(totalScore)".write(to: fileURL, atomically: true, encoding: .utf8)
            } catch {
                print("Error writing score to TotalScore file:", error)
@@ -140,12 +132,12 @@ class UserDataFileManager {
            let fileURL = url.appendingPathComponent("TotalScore.txt")
            
            do {
-               // Check if the "TotalScore" file exists
+               
                if FileManager.default.fileExists(atPath: fileURL.path) {
-                   // Read the content of the file as a string
+               
                    let scoreString = try String(contentsOf: fileURL)
                    
-                   // Convert the string to an integer
+             
                    if let score = Int(scoreString.trimmingCharacters(in: .whitespacesAndNewlines)) {
                        return score
                    } else {

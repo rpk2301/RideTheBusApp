@@ -5,13 +5,13 @@ struct CustomPopup: View {
     
     var body: some View {
         ZStack {
-            // Background overlay
+        
             LinearGradient(gradient: Gradient(colors: [Color.green, Color.black]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
                 .opacity(0.4)
             
             if isShowing {
-                // Text displayed horizontally across the screen
+             
                 Text("Congratulations, you rode the bus")
                     .font(.largeTitle)
                     .foregroundColor(.yellow)

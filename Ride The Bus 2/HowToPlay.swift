@@ -33,14 +33,14 @@ struct HowToPlay: View {
                 .padding(.horizontal, 20)
             }
         }
-        .navigationBarTitle("", displayMode: .inline) // Hide navigation bar title
-        .navigationBarHidden(false) // Show navigation bar
-        .navigationBarBackButtonHidden(true) // Hide default back button
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
             Button(action: {
             presentationMode.wrappedValue.dismiss()
             }) {
-                Image(systemName: "arrow.left") // Custom back button image
+                Image(systemName: "arrow.left")  
                     .foregroundColor(.yellow)
                     .padding()
             }

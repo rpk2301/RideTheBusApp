@@ -35,8 +35,8 @@ struct ContentView: View {
                                 .padding(.top, 50.0)
                             
                             Image("bus2")
-                                .resizable() // Make the image resizable
-                                .aspectRatio(contentMode: .fit) // Maintain aspect ratio
+                                .resizable() 
+                                .aspectRatio(contentMode: .fit)
                                 .frame(maxWidth: 400, maxHeight: 250)
                         }
                         Spacer()
@@ -52,7 +52,7 @@ struct ContentView: View {
                                 .background(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
-                                            Color(red: 0.8, green: 0.6, blue: 0.2), // Example RGB values
+                                            Color(red: 0.8, green: 0.6, blue: 0.2),
                                             Color(red: 0.1, green: 0.4, blue: 0.2)
                                         ]),
                                         startPoint: .bottomLeading,
@@ -75,7 +75,7 @@ struct ContentView: View {
                                 .background(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
-                                            Color(red: 0.8, green: 0.6, blue: 0.2), // Example RGB values
+                                            Color(red: 0.8, green: 0.6, blue: 0.2),
                                             Color(red: 0.1, green: 0.4, blue: 0.2)
                                         ]),
                                         startPoint: .bottomLeading,
@@ -99,7 +99,7 @@ struct ContentView: View {
                                 .background(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
-                                            Color(red: 0.8, green: 0.6, blue: 0.2), // Example RGB values
+                                            Color(red: 0.8, green: 0.6, blue: 0.2),
                                             Color(red: 0.1, green: 0.4, blue: 0.2)
                                         ]),
                                         startPoint: .bottomLeading,
@@ -125,7 +125,7 @@ struct ContentView: View {
                                 
                                 Text("Cards Ridden")
                                     .padding(.bottom, 15.0)
-                                    .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2) // Example shadow
+                                    .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
                                     .font(.system(size: 25.0))
                                     .fontWeight(.medium)
                                     .foregroundColor(Color.yellow)

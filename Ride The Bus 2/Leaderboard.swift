@@ -37,7 +37,6 @@ struct Leaderboard: View {
                                     Spacer()
                                     Text("\(player.1)")
                                     Button(action: {
-                                        // Call a function to delete this player record
                                         deletePlayer(at: index)
                                     }) {
                                         Image(systemName: "trash")
@@ -95,7 +94,6 @@ struct Leaderboard: View {
     
     private func deletePlayer(at index: Int) {
         let player = players.remove(at: index)
-        // Perform deletion action, such as deleting the corresponding file
         UserDataFileManager.deletePlayer(player.0)
     }
 }

@@ -6,9 +6,9 @@ struct WinSplashView: View {
     @State private var size: CGFloat = 0.8
     @State private var opacity = 0.5
     @State private var textOpacity = 0.0
-    @State private var imageOpacity = 0.0 // New state for image opacity
+    @State private var imageOpacity = 0.0 
     let score: Int
-    let audioPlayer: AVAudioPlayer? // Add AVAudioPlayer as a property
+    let audioPlayer: AVAudioPlayer?
 
     init(score: Int) {
         self.score = score
@@ -32,7 +32,7 @@ struct WinSplashView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 200, maxHeight: 250)
                         .rotationEffect(.degrees(90))
-                        .opacity(imageOpacity) // Apply opacity based on state
+                        .opacity(imageOpacity)
 
                     Text("Well Done! You Rode The Bus For \(score) Cards")
                         .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
@@ -55,12 +55,12 @@ struct WinSplashView: View {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                         withAnimation(.easeIn(duration: 1.0)) {
-                            self.textOpacity = 1.0 // gradually increase text opacity
+                            self.textOpacity = 1.0
                         }
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
                         withAnimation(.easeIn(duration: 1.0)) {
-                            self.imageOpacity = 1.0 // gradually increase image opacity
+                            self.imageOpacity = 1.0
                         }
                     }
                 }
@@ -69,16 +69,15 @@ struct WinSplashView: View {
             .background(Color.black)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
-                // Play the audio when the screen appears
                 audioPlayer?.play()
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                    // Stop the audio after a certain duration
+                   
                     if let player = audioPlayer, player.isPlaying {
                         player.stop()
                     }
 
-                    // Update the isActive flag to trigger navigation
+                  
                     self.isActive = true
                 }
             }
