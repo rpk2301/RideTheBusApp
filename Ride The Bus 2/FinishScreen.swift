@@ -37,10 +37,22 @@ struct FinishScreen: View {
                                 Text("Add To Leaderboard")
                                     .font(.title2)
                                     .fontWeight(.bold)
+                                    .bold()
+                                    .frame(width: 140, height: 100)
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.green)
-                                    .cornerRadius(10)
+                                    .background(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                Color(red: 0.1, green: 0.7, blue: 0.1),
+                                                Color(red: 0.7, green: 0.9, blue: 0.7) // Light green
+                                                    
+                                            ]),
+                                            startPoint: .bottomLeading,
+                                            endPoint: .topLeading
+                                        )
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                    .shadow(radius: 3)
                             }
                             .sheet(isPresented: $showNameInput) {
                                 NameInputView(playerName: $playerName, addToLeaderboard: { name in
@@ -58,10 +70,21 @@ struct FinishScreen: View {
                                 Text("Play Again")
                                     .font(.title2)
                                     .fontWeight(.bold)
+                                    .bold()
+                                    .frame(width: 140, height: 100)
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
+                                    .background(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                Color(red: 0.95, green: 0.85, blue: 0.2),
+                                                 Color(red: 0.85, green: 0.65, blue: 0.05)
+                                            ]),
+                                            startPoint: .bottomLeading,
+                                            endPoint: .topLeading
+                                        )
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                    .shadow(radius: 3)
                             }
                             .rotationEffect(.degrees(90))
                             .padding()
@@ -70,10 +93,22 @@ struct FinishScreen: View {
                                 Text("Exit")
                                     .font(.title2)
                                     .fontWeight(.bold)
+                                    .bold()
+                                    .frame(width: 140, height: 100)
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.red)
-                                    .cornerRadius(10)
+                                    .background(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [
+                                                Color(red: 0.9, green: 0.3, blue: 0.3), // Dark Red
+                                                      Color(red: 0.2, green: 0.0, blue: 0.0) // Black // Black
+                                            ]),
+                                            startPoint: .bottomLeading,
+                                            endPoint: .topLeading
+                                        )
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                                    .shadow(radius: 3)
+                                    
                             }
                             .rotationEffect(.degrees(90))
                             .padding()
@@ -81,20 +116,7 @@ struct FinishScreen: View {
                         }
                         
                         ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [Color(red: 0, green: 0.7, blue: 0, opacity: 0.6), Color(red: 0.8, green: 0.3, blue: 0, opacity: 0.4)]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.yellow.opacity(0.6), lineWidth: 3)
-                                        .shadow(color: Color.black.opacity(0.8), radius: 20, x: 0, y: 0)
-                                )
-                                .frame(width: 220.0, height: 300.0)
+                          
                             
                             Text("Play Again?")
                                 .rotationEffect(.degrees(90))
@@ -104,7 +126,7 @@ struct FinishScreen: View {
                                 .fontWeight(.medium)
                                 .foregroundColor(Color.yellow)
                                 .multilineTextAlignment(.center)
-                                .scaleEffect(isGlowing ? 1.2 : 1.0)
+                                .scaleEffect(isGlowing ? 1.7 : 1.0)
                                 .onAppear {
                                     withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
                                         self.isGlowing.toggle() 

@@ -8,7 +8,7 @@ struct GamePage: View {
     @State private var currentIndex = 0
     @State private var nextIndex = 1
     @State private var deckIndex = 0
-    @State private var score = 23
+    @State private var score = 0
     @State private var higherGuess = false
     @State private var lowerGuess = false
     @State private var redGuess = false
@@ -28,7 +28,7 @@ struct GamePage: View {
     @State private var thirdStackFirstFlip: Bool = false
     @State private var fourthStackFirstFlip: Bool = false
     @State private var isCardViewPresented = false
-    @State private var didWin = true
+    @State private var didWin = false
     @State private var DeckSize = 48
     @State private var showDeck = false
     @State private var goHome = false
@@ -105,7 +105,7 @@ struct GamePage: View {
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .bold()
-                                        .frame(width: 200, height: 50)
+                                        .frame(width: 150, height: 50)
                                     
                                         .foregroundColor(.yellow)
                                         .background(
@@ -133,7 +133,7 @@ struct GamePage: View {
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .bold()
-                                        .frame(width: 200, height: 50)
+                                        .frame(width: 150, height: 50)
                                         .foregroundColor(.yellow)
                                         .background(
                                             LinearGradient(
@@ -164,7 +164,7 @@ struct GamePage: View {
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .bold()
-                                        .frame(width: 200, height: 50)
+                                        .frame(width: 150, height: 50)
                                     
                                         .foregroundColor(.yellow)
                                         .background(
@@ -192,7 +192,7 @@ struct GamePage: View {
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .bold()
-                                        .frame(width: 200, height: 50)
+                                        .frame(width: 150, height: 50)
                                         .foregroundColor(.white)
                                         .background(
                                             LinearGradient(
@@ -616,6 +616,8 @@ struct GamePage: View {
             print("Correct!")
             print("The next card was " + deck[deckIndex].rank+deck[deckIndex].suit)
             deckIndex+=1
+                thirdStackFirstFlip = true
+            
         }
         else{
             flashScreenRed(duration: 1)

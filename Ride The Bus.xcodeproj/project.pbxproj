@@ -141,7 +141,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9C3C135C2BA19D160026B215 /* Build configuration list for PBXProject "Ride The Bus 2" */;
+			buildConfigurationList = 9C3C135C2BA19D160026B215 /* Build configuration list for PBXProject "Ride The Bus" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -324,6 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ride The Bus 2/Preview Content\"";
+				DEVELOPMENT_TEAM = 98Z45822HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -352,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ride The Bus 2/Preview Content\"";
+				DEVELOPMENT_TEAM = 98Z45822HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -375,7 +377,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9C3C135C2BA19D160026B215 /* Build configuration list for PBXProject "Ride The Bus 2" */ = {
+		9C3C135C2BA19D160026B215 /* Build configuration list for PBXProject "Ride The Bus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C3C136D2BA19D170026B215 /* Debug */,

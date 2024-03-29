@@ -27,6 +27,11 @@ struct HowToPlay: View {
                         SlideView(title: "Progression", description: "A Correct Guess Will Advance You One Stack, While An Incorrect Guess Will Move You One Stack Back", imageName: "moveUp")
                         SlideView(title: "View A Stack", description: "Select A Stack To View Its Contents - This Can Help You Make A Guess On Later Stacks In The Bus", imageName: "Select1")
                         SlideView(title: "Win!", description: "Progressing Through The Entire Bus Will Take You To The Win Screen - Congratulations, You Just Rode The Bus!", imageName: "Win1")
+                        SlideView(title: "Total Miles", description: "On Your Homescreen, You Can See The Total Cards Rode On Your Device", imageName: "ridden")
+                        SlideView(title: "Leaderboard", description: "Visit The Leaderboard To See Your Best And Worse Rides - Add A Score From The Win Screen", imageName: "leader")
+
+                        SlideView(title: "Thank You", description: "Thanks For Reading, And Enjoy Your Ride!", imageName: "rtb")
+                        SlideView(title: "", description: "", imageName: "")
                     }
                     .frame(maxWidth: .infinity)
                 }
