@@ -36,7 +36,7 @@ struct WinSplashView: View {
 
                     Text("Well Done! You Rode The Bus For \(score) Cards")
                         .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0, y: 2)
-                        .font(.system(size: 30.0))
+                        .font(.system(size: UIScreen.main.bounds.height < 668 ? 25.0 : 30.0))
                         .fontWeight(.medium)
                         .foregroundColor(Color.yellow)
                         .multilineTextAlignment(.center)

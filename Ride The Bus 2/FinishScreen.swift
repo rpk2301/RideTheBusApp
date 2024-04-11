@@ -24,6 +24,7 @@ struct FinishScreen: View {
             NavigationView {
                 ZStack {
                     Image("background-cloth")
+                        .ignoresSafeArea(.all)
                     // Background overlay
                     LinearGradient(gradient: Gradient(colors: [Color.green, Color.black]), startPoint: .topLeading, endPoint: .bottomTrailing)
                         .edgesIgnoringSafeArea(.all)

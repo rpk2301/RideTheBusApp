@@ -1,4 +1,5 @@
 import SwiftUI
+import AWSDynamoDB
 
 struct Leaderboard: View {
     @Environment(\.presentationMode) var presentationMode
@@ -8,6 +9,7 @@ struct Leaderboard: View {
     var body: some View {
         ZStack{
             Image("background-cloth")
+                .ignoresSafeArea(.all)
             
             VStack {
                 Text("Leaderboard")
@@ -16,7 +18,7 @@ struct Leaderboard: View {
                     .fontWeight(.medium)
                     .foregroundColor(Color.yellow)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 100.0)
+                    .padding(.top, UIScreen.main.bounds.height < 737 ? 200.0 : 100.0)
                 
                 if players.isEmpty {
                     Text("No Scores Saved")

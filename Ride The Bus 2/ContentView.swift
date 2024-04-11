@@ -30,16 +30,18 @@ struct ContentView: View {
                                 .fontWeight(.medium)
                                 .foregroundColor(Color.yellow)
                                 .multilineTextAlignment(.center)
-                                .padding(.top, 50.0)
+                                .padding(.top, UIScreen.main.bounds.height < 737 ? 00.0 : 50.0)
                             
-                                .padding(.top, 50.0)
+                                .padding(.top, UIScreen.main.bounds.height < 737 ? 00.0 : 50.0)
                             
                             Image("bus2")
                                 .resizable() 
                                 .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 400, maxHeight: 250)
+                                .frame(maxWidth: UIScreen.main.bounds.height < 737 ? 300 : 400, maxHeight: UIScreen.main.bounds.height < 737 ? 155 : 250)
                         }
-                        Spacer()
+                        if UIScreen.main.bounds.height > 737 {
+                               Spacer()
+                           }
                         Button(action:{GoToGame = true
                         }, label: {
                             
@@ -111,8 +113,10 @@ struct ContentView: View {
                         }
                         
                         
-                        
-                        Spacer()
+                        if UIScreen.main.bounds.height > 667 {
+                               Spacer()
+                           }
+                       
                         HStack{
                             Spacer()
                             VStack{

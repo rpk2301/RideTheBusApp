@@ -7,7 +7,7 @@ struct GamePage: View {
     
     @State private var currentIndex = 0
     @State private var nextIndex = 1
-    @State private var deckIndex = 0
+    @State private var deckIndex = 4
     @State private var score = 0
     @State private var higherGuess = false
     @State private var lowerGuess = false
@@ -29,8 +29,6 @@ struct GamePage: View {
     @State private var fourthStackFirstFlip: Bool = false
     @State private var isCardViewPresented = false
     @State private var didWin = false
-    @State private var DeckSize = 48
-    @State private var showDeck = false
     @State private var goHome = false
     
     
@@ -38,22 +36,36 @@ struct GamePage: View {
     
     
     init() {
+      
         var shuffledDecks = [[Card]]()
 
+        
+        for _ in 0..<20 {
+            var deck = [Card]()
+            
+            // Create a deck of 52 cards
+            for suit in suits {
+                for rank in ranks {
+                    let card = Card(suit: suit, rank: rank)
+                    deck.append(card)
+                }
+            }
+            
+        
+            deck.shuffle()
+            
           
-          for _ in 0..<20 {
-              var deck = [Card]()
-              for suit in suits {
-                  for rank in ranks {
-                      let card = Card(suit: suit, rank: rank)
-                      deck.append(card)
-                  }
-              }
-              shuffledDecks.append(deck.shuffled())
-          }
+            shuffledDecks.append(deck)
+        }
 
+      
+        let concatenatedDeck = shuffledDecks.flatMap { $0 }
 
-          self.deck = shuffledDecks.reduce([], +)
+        // Ensure the total count is still 1040
+        self.deck = concatenatedDeck
+        
+        
+        
         var bus = [Stack<Card>]()
         
         
@@ -61,9 +73,11 @@ struct GamePage: View {
             var stack = Stack<Card>()
             stack.push(deck[i])
             bus.append(stack)
-            deck.remove(at: 0)
-        }
+            }
         print(deck.count)
+        for i in 0..<54{
+            print (deck[i].rank+deck[i].suit)
+        }
         self.bus = bus
         FirstStackTop = bus[0].peek()!
         SecondStackTop = bus[1].peek()!
@@ -92,6 +106,7 @@ struct GamePage: View {
             NavigationView{
                 ZStack {
                     Image("background-cloth")
+                        .ignoresSafeArea(.all)
                     HStack{
                         if(currentIndex == 0 || currentIndex == 1)
                         {
@@ -337,13 +352,13 @@ struct GamePage: View {
                                     
                                     
                                     Image(imageName)
-                                        .frame(width: 180.0, height: 125.0)
-                                        .rotationEffect(.degrees(90))
-                                        .scaleEffect(CGSize(width: 0.75, height: 0.75))
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(Color.yellow, lineWidth: 10)
-                                                .blur(radius: 5)
+                                        .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
+                                                    .rotationEffect(.degrees(90))
+                                                    .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .stroke(Color.yellow, lineWidth: UIScreen.main.bounds.height < 667 ? 5 : 10)
+                                                            .blur(radius: 5)
                                                 .opacity(self.isGlowing[currentIndex] && currentIndex == 0 ? 1.0 : 0.0)
                                         )
                                         .onAppear {
@@ -363,27 +378,32 @@ struct GamePage: View {
                                     let suit1 = SecondStackTop.suit
                                     let imageName = "\(rank1)_of_\(suit1)"
                                     if(secondStackFirstFlop){
-                                        Image(imageName)
-                                            .frame(width: 180.0, height: 125.0)
-                                            .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color.yellow, lineWidth: 10)
-                                                    .blur(radius: 5)
-                                                    .opacity(self.isGlowing[currentIndex] && currentIndex == 1 ? 1.0 : 0.0)
-                                            )
-                                            .onAppear {
-                                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                                                    self.isGlowing[currentIndex] = true
+                                        HStack {
+                                            let rank1 = SecondStackTop.rank
+                                            let suit1 = SecondStackTop.suit
+                                            let imageName = "\(rank1)_of_\(suit1)"
+                                            Image(imageName)
+                                                .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
+                                                .rotationEffect(.degrees(90))
+                                                .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Color.yellow, lineWidth: 10)
+                                                        .blur(radius: 5)
+                                                        .opacity(self.isGlowing[currentIndex] && currentIndex == 1 ? 1.0 : 0.0)
+                                                )
+                                                .onAppear {
+                                                    withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                                                        self.isGlowing[currentIndex] = true
+                                                    }
                                                 }
-                                            }
+                                        }
                                     }
                                     else{
                                         Image(imageName)
-                                            .frame(width: 180.0, height: 125.0)
+                                            .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
                                             .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
+                                            .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.yellow, lineWidth: 10)
@@ -401,9 +421,8 @@ struct GamePage: View {
                             }
                             HStack{
                                 Image("2B")
-                                    .frame(width: 125.0, height: 200.0)
-                                    .scaleEffect(CGSize(width: 0.75, height: 0.75))
-                            }
+                                    .frame(width: UIScreen.main.bounds.height < 737 ? 80.0 : 125.0, height: UIScreen.main.bounds.height < 737 ? 165.0 : 200.0)
+                                .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))                            }
                             NavigationLink(destination: CardView(stack: bus[2])){
                                 HStack{
                                     
@@ -412,9 +431,9 @@ struct GamePage: View {
                                     let imageName = "\(rank2)_of_\(suit2)"
                                     if(thirdStackFirstFlip){
                                         Image(imageName)
-                                            .frame(width: 180.0, height: 125.0)
+                                            .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
                                             .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
+                                            .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.yellow, lineWidth: 10)
@@ -429,9 +448,9 @@ struct GamePage: View {
                                     }
                                     else{
                                         Image("2B")
-                                            .frame(width: 180.0, height: 125.0)
+                                            .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
                                             .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
+                                            .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.yellow, lineWidth: 10)
@@ -456,9 +475,9 @@ struct GamePage: View {
                                     let imageName = "\(rank3)_of_\(suit3)"
                                     if(fourthStackFirstFlip){
                                         Image(imageName)
-                                            .frame(width: 180.0, height: 125.0)
+                                            .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
                                             .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
+                                            .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.yellow, lineWidth: 10)
@@ -474,9 +493,9 @@ struct GamePage: View {
                                     
                                     else{
                                         Image("2B")
-                                            .frame(width: 180.0, height: 125.0)
+                                            .frame(width: UIScreen.main.bounds.height < 737 ? 145.0 : 180.0, height: UIScreen.main.bounds.height < 737 ? 100.0 : 125.0)
                                             .rotationEffect(.degrees(90))
-                                            .scaleEffect(CGSize(width: 0.75, height: 0.75))
+                                            .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.6, height: 0.6) : CGSize(width: 0.75, height: 0.75))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.yellow, lineWidth: 10)
@@ -496,7 +515,7 @@ struct GamePage: View {
                         }
                         HStack {
                             VStack {
-                                if(countDeck()>=1 || showDeck){
+                                if(countDeck()>=1){
                                     Text("Score: \(countDeck())")
                                         .frame(maxWidth: .infinity, maxHeight: nil)
                                         .frame(width: 175.0)
@@ -512,7 +531,7 @@ struct GamePage: View {
                                             .foregroundColor(.yellow)
                                             .font(.title)
                                     }
-                                    .padding(.trailing, 700.0)
+                                    .padding(.trailing,  UIScreen.main.bounds.height < 737 ? 600.0 : 700.0)
                                     .padding(.bottom,50)
 
                                 }
@@ -533,7 +552,7 @@ struct GamePage: View {
                                             .foregroundColor(.yellow)
                                             .font(.title)
                                     }
-                                    .padding(.trailing, 700.0)
+                                    .padding(.trailing,  UIScreen.main.bounds.height < 737 ? 600.0 : 700.0)
                                     .padding(.bottom,50)
                                     
                                     

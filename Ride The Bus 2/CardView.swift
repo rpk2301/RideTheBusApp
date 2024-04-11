@@ -33,7 +33,7 @@ struct CardView: View {
                 
             }
             .padding(.horizontal)
-            .padding(.bottom, 660.0)
+            .padding(.bottom, UIScreen.main.bounds.height < 737 ? 600.0 : 660.0)
             VStack{
                 Text("Cards In Stack: \(stack.count)")
                     .padding(.top, 280.0)
@@ -55,13 +55,14 @@ struct CardView: View {
             }
             VStack {
                 ScrollView(.vertical) {
-                    VStack(spacing: 10) {
+                    VStack(spacing: UIScreen.main.bounds.height < 737 ? 0 : 10) {
                         ForEach(stack.toArray()) { card in
                             VStack {
                                 Image("\(card.rank)_of_\(card.suit)")
                                     .resizable()
                                     .frame(width: 150.0, height: 200.0)
                                     .rotationEffect(.degrees(90))
+                                    .scaleEffect(UIScreen.main.bounds.height < 737 ? CGSize(width: 0.75, height: 0.75) : CGSize(width: 1.0, height: 1.0))
                             }
                             .frame(width: 200.0, height: 160.0)
                         }
